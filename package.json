@@ -1,6 +1,6 @@
 {
   "name": "match-columns-to-schema",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Schema field matching algorithm for spreadsheet uploads",
   "main": "demo.js",
   "scripts": {
