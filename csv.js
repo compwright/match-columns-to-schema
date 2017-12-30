@@ -1,26 +1,29 @@
-const readline = require('readline')
-const csv = require('csv-string')
-const {Observable, ReplaySubject} = require('rxjs')
-const RxNode = require('rx-node-vx')
+const { Observable, ReplaySubject } = require('rxjs');
+const { parse } = require('papaparse');
 
-module.exports = (stream) => {
-    const lineStream = readline.createInterface({ input: stream })    
+module.exports = stream => {
+  const dataSource = Observable.create(observer => {
+    let row = 0;
+    parse(stream, {
+      skipEmptyLines: true,
+      step: ({ data }) => {
+        observer.next({ index: row++, values: data[0] });
+      },
+      error: error => observer.error(error),
+      complete: () => observer.complete()
+    });
+  });
 
-    const dataSource = new ReplaySubject()
-    const columns = new ReplaySubject()
-    const rows = new ReplaySubject()
-    
-    const csvSource = RxNode.fromReadLineStream(lineStream)
-        .map((row, index) => ({ index, values: csv.parse(row)[0] }))
-        .subscribe(dataSource)
+  const columns = new ReplaySubject();
+  dataSource
+    .take(1)
+    .map(({ values }) => Observable.of(...values))
+    .mergeAll() // flatten array
+    .map((name, column) => ({ name, column })) // include 0-based column index
+    .subscribe(columns);
 
-    dataSource.take(1)
-        .map(({ values }) => Observable.of(...values)).mergeAll() // flatten array
-        .map((name, column) => ({ name, column })) // include 0-based column index
-        .subscribe(columns)
+  const rows = new ReplaySubject();
+  dataSource.skip(1).subscribe(rows);
 
-    dataSource.skip(1)
-        .subscribe(rows)
-
-    return { columns, rows }
-}
+  return { columns, rows };
+};

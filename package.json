@@ -12,9 +12,8 @@
     "node": "^8.5.0"
   },
   "dependencies": {
-    "csv-string": "^2.3.2",
     "d3-array": "^1.2.1",
-    "rx-node-vx": "0.0.2",
+    "papaparse": "^4.3.6",
     "rxjs": "^5.4.3",
     "string-similarity": "^1.2.0"
   }
