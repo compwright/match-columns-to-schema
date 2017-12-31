@@ -1,4 +1,6 @@
-# Schema field matching algorithm for spreadsheet uploads
+# Column-to-Schema matching algorithm for CSV file uploads
+
+## About This Project
 
 Implemented using [RxJS observables](http://reactivex.io/rxjs/), because:
 
@@ -7,22 +9,28 @@ Implemented using [RxJS observables](http://reactivex.io/rxjs/), because:
 
 H/T to @jfairbank for his excellent talk at [Connect.tech 2017](https://speakerdeck.com/jfairbank/connect-dot-tech-2017-dive-into-rxjs-observables) for inspiring me to commence this exercise.
 
-## Description of the problem
+### The Problem
 
-We need to parse a user-supplied CSV data file, examine the column names in the first row and the contents of each column, and match field of a pre-defined schema to the column that is the best match. We define "best match" as follows:
+We need to parse a user-supplied CSV data file, examine the column names in the first row and the contents of each column, and match field of a pre-defined schema to the column that is the best match.
+
+We define "best match" as follows:
 
 1. No more than 5% of the column values fail schema field validation, or 100% of the column values are blank
 2. The column name is the most similar to the schema field name
 3. The column appears in the file earliest
 
-## Implementation
+### Implementation
 
-* Useed take(), map(), mergeAll() operators with ReplaySubject for streaming CSV column headers and row data
+* Used take(), map(), and mergeAll() operators with ReplaySubject for streaming CSV column headers and row data
 * ReplaySubject ensures that no items are missed when data is subscribed to repeatedly
 * Since rows are represented by observables, only enough rows are read to supply the data needed for reading the header and computing the column validation score
 * Column names are compared to the schema field name and aliases using the Dice Coefficient algorithm, which works better than Levenshtein
 
-## Sample Data
+## Example
+
+To demonstrate, run `npm run demo`.
+
+List.csv:
 
 ```csv
 "HHName","LastName","FirstName","MiddleName","SuffixName","PrimaryAddress1","PrimaryCity","PrimaryState","PrimaryZip","PrimaryZip4","PrimaryOddEvenCode","PrimaryHouseNumber","PrimaryHouseHalf","PrimaryStreetPre","PrimaryStreetName","PrimaryStreetType","PrimaryStreetPost","PrimaryUnit","PrimaryUnitNumber","PrimaryPhone","TelephoneReliabilityCode","HasPrimaryPhone","EMail","DOB","AgeRange","Age","Gender","OfficialParty","CalculatedParty","RegistrationDate","GeneralFrequency","PrimaryFrequency","OverAllFrequency","GeneralAbsenteeStatus","PrimaryAbsenteeStatus","Moved","CDName","LDName","SDName","CountyName","CountyNumber","PrecinctNumber","PrecinctName","DMA","Turf","CensusBlock","VoterKey","HHRecId","HHMemberId","HHCode","JurisdictionalVoterId","ClientId","StateVoterId","Latitude","Longitude","MD1Name","MD2Name","CellularPhone","HomePhone","OtherPhone"
@@ -34,10 +42,9 @@ We need to parse a user-supplied CSV data file, examine the column names in the 
 
 ```
 
-## Sample Output
+Output:
 
 ```
-$ cat voters.csv | node demo.js
 Matched columns to schema:
 [
   {
