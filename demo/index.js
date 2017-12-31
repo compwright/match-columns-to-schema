@@ -1,5 +1,9 @@
-const csvObservable = require('./csv');
-const { matchColumnsToSchema, readSchemaColumns } = require('./matcher');
+const {
+  csvObservable,
+  matchColumnsToSchema,
+  readSchemaColumns
+} = require('../src');
+
 const schema = require('./schema');
 
 const source = csvObservable(process.stdin);

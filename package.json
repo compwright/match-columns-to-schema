@@ -2,9 +2,20 @@
   "name": "match-columns-to-schema",
   "version": "1.0.1",
   "description": "Schema field matching algorithm for spreadsheet uploads",
-  "main": "demo.js",
+  "keywords": [
+    "rxjs",
+    "schema",
+    "csv",
+    "auto-detect",
+    "algorithm",
+    "reactivex",
+    "stream",
+    "match"
+  ],
+  "main": "src/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo": "cat ./demo/list.csv | node demo"
   },
   "author": "Jonathon Hill <jhill9693@gmail.com>",
   "license": "MIT",
