@@ -1,17 +1,5 @@
-const {
-  csvObservable,
-  matchColumnsToSchema,
-  readSchemaColumns
-} = require('../src');
-
+const ColumnToSchemaMatcher = require('../src');
 const schema = require('./schema');
-
-const source = csvObservable(process.stdin);
-
-const result = {
-  columns: [],
-  rows: []
-};
 
 // 1. Take 100 entries from each column
 // 2. Validate the entries against each schema field
@@ -20,10 +8,19 @@ const result = {
 // 5. Rank by similarity score
 // 6. Pick the top-ranked unique column match for each schema field
 
-matchColumnsToSchema({ schema, ...source })
+const matcher = new ColumnToSchemaMatcher(process.stdin);
+
+matcher
+  .match(schema)
   .toArray()
-  .subscribe(columns => {
+  .subscribe(matchedColumns => {
     console.log('Matched columns to schema:');
-    console.log(JSON.stringify(columns, null, 2));
-    //readSchemaColumns({ matchedColumns: columns, ...source }).subscribe(...)
+    console.log(JSON.stringify(matchedColumns, null, 2));
+
+    console.log('\nFirst three rows of data matched to schema:');
+    matcher
+      .read(matchedColumns)
+      .take(3)
+      .toArray()
+      .subscribe(rows => console.log(JSON.stringify(rows, null, 2)));
   });
