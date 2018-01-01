@@ -12,10 +12,12 @@
     "stream",
     "match"
   ],
-  "main": "src/",
+  "main": "lib/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "demo": "cat ./demo/list.csv | node demo"
+    "demo": "cat ./demo/list.csv | node demo",
+    "build": "babel src -d lib",
+    "prepublish": "npm run build"
   },
   "author": "Jonathon Hill <jhill9693@gmail.com>",
   "license": "MIT",
@@ -27,5 +29,10 @@
     "papaparse": "^4.3.6",
     "rxjs": "^5.4.3",
     "string-similarity": "^1.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
   }
 }
