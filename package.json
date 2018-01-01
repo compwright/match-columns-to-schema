@@ -1,6 +1,6 @@
 {
   "name": "match-columns-to-schema",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Schema field matching algorithm for spreadsheet uploads",
   "keywords": [
     "rxjs",
