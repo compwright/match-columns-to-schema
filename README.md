@@ -45,52 +45,115 @@ List.csv:
 Output:
 
 ```
+$ npm run demo
+
 Matched columns to schema:
 [
   {
     "field": "firstName",
     "header": "FirstName",
-    "index": 2
+    "index": 2,
+    "similarityScore": 1,
+    "validationScore": 1,
+    "label": "First Name"
   },
   {
     "field": "lastName",
     "header": "LastName",
-    "index": 1
+    "index": 1,
+    "similarityScore": 1,
+    "validationScore": 1,
+    "label": "Last Name"
   },
   {
     "field": "email",
     "header": "EMail",
-    "index": 22
+    "index": 22,
+    "similarityScore": 1,
+    "validationScore": null,
+    "label": "E-Mail Address"
   },
   {
     "field": "latitude",
     "header": "Latitude",
-    "index": 53
+    "index": 53,
+    "similarityScore": 1,
+    "validationScore": 1,
+    "label": "Latitude"
   },
   {
     "field": "longitude",
     "header": "Longitude",
-    "index": 54
+    "index": 54,
+    "similarityScore": 1,
+    "validationScore": 1,
+    "label": "Longitude"
   },
   {
     "field": "address",
     "header": "PrimaryAddress1",
-    "index": 5
+    "index": 5,
+    "similarityScore": 0.6666666666666666,
+    "validationScore": 1,
+    "label": "Address"
   },
   {
     "field": "city",
     "header": "PrimaryCity",
-    "index": 6
+    "index": 6,
+    "similarityScore": 0.46153846153846156,
+    "validationScore": 1,
+    "label": "City"
   },
   {
     "field": "state",
     "header": "PrimaryState",
-    "index": 7
+    "index": 7,
+    "similarityScore": 0.5333333333333333,
+    "validationScore": 1,
+    "label": "State"
   },
   {
     "field": "zip",
     "header": "PrimaryZip",
-    "index": 8
+    "index": 8,
+    "similarityScore": 0.36363636363636365,
+    "validationScore": 1,
+    "label": "Zipcode"
+  }
+]
+
+First three rows of data matched to schema:
+[
+  {
+    "firstName": "MICHAEL",
+    "lastName": "KASHA",
+    "latitude": "34.489912",
+    "longitude": "-82.645473",
+    "address": "1621 S McDuffie St",
+    "city": "Anderson",
+    "state": "SC",
+    "zip": "29624"
+  },
+  {
+    "firstName": "MAY",
+    "lastName": "HEMBREE",
+    "latitude": "34.491968",
+    "longitude": "-82.638496",
+    "address": "1506 White St",
+    "city": "Anderson",
+    "state": "SC",
+    "zip": "29624"
+  },
+  {
+    "firstName": "STEVE",
+    "lastName": "CHEEK",
+    "latitude": "34.502244",
+    "longitude": "-82.678952",
+    "address": "215 Beaty Sq",
+    "city": "Anderson",
+    "state": "SC",
+    "zip": "29624"
   }
 ]
 ```

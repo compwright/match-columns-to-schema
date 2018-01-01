@@ -15,7 +15,7 @@ function matchColumnsToSchema({ schema, columns, rows }) {
 
   // Match each column against the schema
   const schemaFields = Object.entries(schema).map(
-    ([field, { aliases, validator }]) => {
+    ([field, { aliases, validator, ...rest }]) => {
       return (
         (validator ? columnsWithValues : columns)
           .map(({ name, column, values }) => ({
@@ -25,7 +25,8 @@ function matchColumnsToSchema({ schema, columns, rows }) {
             similarityScore: max(stricmp_array(name, [field].concat(aliases))),
             validationScore: validator
               ? validationScore(values, validator)
-              : Infinity
+              : Infinity,
+            ...rest
           }))
           // exclude non-matches and validation score < 95%
           .filter(({ similarityScore }) => similarityScore > 0)
@@ -49,9 +50,9 @@ function matchColumnsToSchema({ schema, columns, rows }) {
 
   return Observable.merge(...schemaFields).map(({ columns }) => {
     // Map columns to schema fields 1:1
-    for (let { field, header, index } of columns) {
+    for (let { field, header, index, ...rest } of columns) {
       if (!picked.includes(index)) {
-        return { field, header, index };
+        return { field, header, index, ...rest };
       }
     }
   });
