@@ -17,7 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "demo": "cat ./demo/list.csv | node demo",
     "build": "babel src -d lib",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "author": "Jonathon Hill <jhill9693@gmail.com>",
   "license": "MIT",
