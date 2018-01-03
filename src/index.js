@@ -15,10 +15,19 @@ class ColumnToSchemaMatcher {
   }
 
   read(matchedColumns) {
-    return readSchemaColumns({
-      matchedColumns,
-      rows: this.rows
-    });
+    const matchedIndexes = matchedColumns.map(({ index }) => index);
+
+    return this.columns
+      .map(({ name, column }) => ({ column: name, index: column }))
+      .filter(({ index }) => !matchedIndexes.includes(index))
+      .toArray()
+      .mergeMap(columns =>
+        readSchemaColumns({
+          columns,
+          rows: this.rows,
+          matchedColumns
+        })
+      );
   }
 }
 

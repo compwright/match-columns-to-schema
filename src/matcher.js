@@ -57,15 +57,28 @@ function matchColumnsToSchema({ schema, columns, rows }) {
   });
 }
 
-function readSchemaColumns({ rows, matchedColumns }) {
-  // Observable
+function readSchemaColumns({ columns, rows, matchedColumns, includeUnmatched = true }) {
+  // rows<Observable>
   return rows.map(({ values }) => {
-    // Array
-    return matchedColumns.reduce((row, { field, index }) => {
+    // values<Array>
+
+    const row = {};
+
+    matchedColumns.forEach(({ field, index }) => {
       const value = values[index];
       if (value) row[field] = value; // exclude blank fields
-      return row;
-    }, {});
+    });
+
+    if (includeUnmatched) {
+      row.$unmatched = {};
+
+      columns.forEach(({ column, index }) => {
+        const value = values[index];
+        if (value) row.$unmatched[column] = value;
+      });
+    }
+
+    return row;
   });
 }
 
