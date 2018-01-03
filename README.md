@@ -97,6 +97,7 @@ Matched columns to schema:
 First three rows of data matched to schema:
 [
   {
+    "$index": 1,
     "firstName": "MICHAEL",
     "lastName": "KASHA",
     "latitude": "34.489912",
@@ -149,6 +150,7 @@ First three rows of data matched to schema:
     }
   },
   {
+    "$index": 2,
     "firstName": "MAY",
     "lastName": "HEMBREE",
     "latitude": "34.491968",
@@ -201,6 +203,7 @@ First three rows of data matched to schema:
     }
   },
   {
+    "$index": 3,
     "firstName": "STEVE",
     "lastName": "CHEEK",
     "latitude": "34.502244",

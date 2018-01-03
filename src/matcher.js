@@ -59,10 +59,12 @@ function matchColumnsToSchema({ schema, columns, rows }) {
 
 function readSchemaColumns({ columns, rows, matchedColumns, includeUnmatched = true }) {
   // rows<Observable>
-  return rows.map(({ values }) => {
+  return rows.map(({ values, index }) => {
     // values<Array>
 
-    const row = {};
+    const row = {
+      $index: index
+    };
 
     matchedColumns.forEach(({ field, index }) => {
       const value = values[index];
