@@ -2,7 +2,7 @@ const { Observable, ReplaySubject } = require('rxjs');
 const stringSimilarity = require('string-similarity');
 const { max } = require('d3-array');
 
-function matchColumnsToSchema({ schema, columns, rows }) {
+function matchColumnsToSchema ({ schema, columns, rows }) {
   // ReplaySubject observable for each column with up to 100 non-blank column values
   const columnsWithValues = new ReplaySubject();
   columns
@@ -22,7 +22,7 @@ function matchColumnsToSchema({ schema, columns, rows }) {
             field,
             header: name,
             index: column,
-            similarityScore: max(stricmp_array(name, [field].concat(aliases))),
+            similarityScore: max(stricmpArray(name, [field].concat(aliases))),
             validationScore: validator
               ? validationScore(values, validator)
               : Infinity
@@ -45,7 +45,6 @@ function matchColumnsToSchema({ schema, columns, rows }) {
   );
 
   const picked = [];
-  const matchedColumns = [];
 
   return Observable.merge(...schemaFields).map(({ columns }) => {
     // Map columns to schema fields 1:1
@@ -57,7 +56,7 @@ function matchColumnsToSchema({ schema, columns, rows }) {
   });
 }
 
-function readSchemaColumns({ columns, rows, matchedColumns, includeUnmatched = true }) {
+function readSchemaColumns ({ columns, rows, matchedColumns, includeUnmatched = true }) {
   // rows<Observable>
   return rows.map(({ values, index }) => {
     // values<Array>
@@ -85,14 +84,14 @@ function readSchemaColumns({ columns, rows, matchedColumns, includeUnmatched = t
 }
 
 // Get a dense array of column values for validation
-function columnValues(rows, index, limit = Infinity) {
+function columnValues (rows, index, limit = Infinity) {
   const observer = rows.map(({ values }) => values[index]).filter(str => !!str);
 
   return limit < Infinity ? observer.take(limit) : observer;
 }
 
 // Percentage of column values that pass column validation
-function validationScore(values, validator) {
+function validationScore (values, validator) {
   const validations = values.map(validator).map(Number);
 
   return validations.length > 0
@@ -101,7 +100,7 @@ function validationScore(values, validator) {
 }
 
 // Compare a string to an array of strings (case-insensitive)
-const stricmp_array = (a, bs = []) =>
+const stricmpArray = (a, bs = []) =>
   bs
     .filter(b => b)
     .map(b =>

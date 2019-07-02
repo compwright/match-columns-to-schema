@@ -1,5 +1,11 @@
 # Column-to-Schema matching algorithm for CSV file uploads
 
+[![Build Status](https://travis-ci.org/compwright/match-columns-to-schema.png?branch=master)](https://travis-ci.org/compwright/match-columns-to-schema)
+[![Code Climate](https://codeclimate.com/github/compwright/match-columns-to-schema/badges/gpa.svg)](https://codeclimate.com/github/compwright/match-columns-to-schema)
+[![Test Coverage](https://codeclimate.com/github/compwright/match-columns-to-schema/badges/coverage.svg)](https://codeclimate.com/github/compwright/match-columns-to-schema/coverage)
+[![Dependency Status](https://img.shields.io/david/compwright/match-columns-to-schema.svg?style=flat-square)](https://david-dm.org/compwright/match-columns-to-schema)
+[![Download Status](https://img.shields.io/npm/dm/match-columns-to-schema.svg?style=flat-square)](https://www.npmjs.com/package/match-columns-to-schema)
+
 ## About This Project
 
 Implemented using [RxJS observables](http://reactivex.io/rxjs/), because:

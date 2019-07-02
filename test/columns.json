@@ -1,0 +1,47 @@
+[
+  {
+    "field": "firstName",
+    "header": "FirstName",
+    "index": 2
+  },
+  {
+    "field": "lastName",
+    "header": "LastName",
+    "index": 1
+  },
+  {
+    "field": "email",
+    "header": "EMail",
+    "index": 22
+  },
+  {
+    "field": "latitude",
+    "header": "Latitude",
+    "index": 53
+  },
+  {
+    "field": "longitude",
+    "header": "Longitude",
+    "index": 54
+  },
+  {
+    "field": "address",
+    "header": "PrimaryAddress1",
+    "index": 5
+  },
+  {
+    "field": "city",
+    "header": "PrimaryCity",
+    "index": 6
+  },
+  {
+    "field": "state",
+    "header": "PrimaryState",
+    "index": 7
+  },
+  {
+    "field": "zip",
+    "header": "PrimaryZip",
+    "index": 8
+  }
+]

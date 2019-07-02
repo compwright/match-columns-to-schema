@@ -2,11 +2,11 @@ const csvObservable = require('./csv');
 const { matchColumnsToSchema, readSchemaColumns } = require('./matcher');
 
 class ColumnToSchemaMatcher {
-  constructor(csvStream) {
+  constructor (csvStream) {
     Object.assign(this, csvObservable(csvStream));
   }
 
-  match(schema) {
+  match (schema) {
     return matchColumnsToSchema({
       schema,
       rows: this.rows,
@@ -14,7 +14,7 @@ class ColumnToSchemaMatcher {
     });
   }
 
-  read(matchedColumns) {
+  read (matchedColumns) {
     const matchedIndexes = matchedColumns.map(({ index }) => index);
 
     return this.columns
