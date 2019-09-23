@@ -48,7 +48,7 @@ function matchColumnsToSchema ({ schema, columns, rows }) {
 
   return Observable.merge(...schemaFields).map(({ columns }) => {
     // Map columns to schema fields 1:1
-    for (let { field, header, index } of columns) {
+    for (const { field, header, index } of columns) {
       if (!picked.includes(index)) {
         return { field, header, index };
       }

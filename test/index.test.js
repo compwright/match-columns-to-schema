@@ -14,7 +14,7 @@ describe('ColumnToSchemaMatcher', () => {
     it('expects a readable stream', () => {
       assert.throws(() => new ColumnToSchemaMatcher(), {
         name: 'TypeError',
-        message: `Cannot read property 'readable' of undefined`
+        message: 'Cannot read property \'readable\' of undefined'
       });
     });
   });
