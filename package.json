@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "d3-array": "^2.4.0",
-    "papaparse": "^4.6.3",
+    "papaparse": "^5.2.0",
     "rxjs": "^5.5.12",
     "string-similarity": "^4.0.1"
   },
