@@ -5,6 +5,7 @@
 [![Test Coverage](https://codeclimate.com/github/compwright/match-columns-to-schema/badges/coverage.svg)](https://codeclimate.com/github/compwright/match-columns-to-schema/coverage)
 [![Dependency Status](https://img.shields.io/david/compwright/match-columns-to-schema.svg?style=flat-square)](https://david-dm.org/compwright/match-columns-to-schema)
 [![Download Status](https://img.shields.io/npm/dm/match-columns-to-schema.svg?style=flat-square)](https://www.npmjs.com/package/match-columns-to-schema)
+[![Sponsor on GitHub](https://img.shields.io/static/v1?label=Sponsor&message=❤&logo=GitHub&link=https://github.com/sponsors/compwright)](https://github.com/sponsors/compwright)
 
 ## About This Project
 
