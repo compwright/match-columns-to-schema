@@ -7,7 +7,7 @@ module.exports = stream => {
     parse(stream, {
       skipEmptyLines: true,
       step: ({ data }) => {
-        observer.next({ index: row++, values: data[0] });
+        observer.next({ index: row++, values: data });
       },
       error: error => observer.error(error),
       complete: () => observer.complete()

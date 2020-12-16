@@ -53,6 +53,7 @@ function matchColumnsToSchema ({ schema, columns, rows }) {
         return { field, header, index };
       }
     }
+    return {};
   });
 }
 
