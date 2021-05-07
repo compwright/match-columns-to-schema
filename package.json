@@ -13,7 +13,8 @@
     "stream",
     "match"
   ],
-  "main": "dist/",
+  "source": "dist/node.js",
+  "browser": "dist/browser.min.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/compwright/match-columns-to-schema.git"
@@ -28,21 +29,24 @@
     "node": ">= 10"
   },
   "scripts": {
-    "publish": "git push origin --tags && git push origin",
-    "release:pre": "npm version prerelease && npm publish --tag pre",
-    "release:patch": "npm version patch && npm publish",
-    "release:minor": "npm version minor && npm publish",
-    "release:major": "npm version major && npm publish",
-    "lint": "semistandard src/*.js src/**/*.js test/*.js test/**/*.js --fix",
-    "mocha": "mocha --recursive test/ --exit",
-    "coverage": "nyc npm run mocha",
-    "test": "npm run lint && npm run coverage",
+    "pretest": "semistandard src/*.js src/**/*.js test/*.js test/**/*.js --fix",
+    "test": "nyc mocha --recursive test/ --exit",
     "demo": "cat ./demo/list.csv | node demo",
-    "build": "babel src -d dist",
-    "prepare": "npm run build"
+    "build:node": "parcel build ./src/index.js --target node --out-file node.js --no-minify --no-source-maps",
+    "build:browser": "parcel build ./src/index.js --target browser --out-file browser.min.js",
+    "build": "npm run build:node && npm run build:browser",
+    "prepublish": "npm run build && git commit -am \"Build\"",
+    "publish": "git push origin --tags && npm run changelog && git push origin",
+    "release:pre": "npm version prerelease && npm publish --tag pre --access public",
+    "release:patch": "npm version patch && npm publish --access public",
+    "release:minor": "npm version minor && npm publish --access public",
+    "release:major": "npm version major && npm publish --access public",
+    "changelog": "github_changelog_generator -u compwright -p match-columns-to-schema && git add CHANGELOG.md && git commit -am \"Updating changelog\""
   },
   "semistandard": {
     "env": [
+      "node",
+      "browser",
       "mocha"
     ]
   },
@@ -58,22 +62,18 @@
     ]
   },
   "browserslist": "> 0.25%, not dead",
-  "directories": {
-    "lib": "dist"
-  },
   "dependencies": {
     "d3-array": "^2.9.1",
     "papaparse": "^5.2.0",
     "rxjs": "^5.5.12",
-    "string-similarity": "^4.0.3"
+    "string-similarity": "^4.0.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
-    "@babel/preset-env": "^7.12.11",
-    "mocha": "^8.2.0",
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "mocha": "^8.4.0",
     "nyc": "^15.1.0",
-    "semistandard": "^16.0.0"
+    "parcel-bundler": "^1.12.5",
+    "semistandard": "*"
   }
 }
