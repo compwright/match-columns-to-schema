@@ -1,8 +1,8 @@
-const { Observable, ReplaySubject } = require('rxjs');
-const stringSimilarity = require('string-similarity');
-const { max } = require('d3-array');
+import { max } from 'd3-array/dist/d3-array';
+import { Observable, ReplaySubject } from 'rxjs';
+import stringSimilarity from 'string-similarity';
 
-function matchColumnsToSchema ({ schema, columns, rows }) {
+export function matchColumnsToSchema ({ schema, columns, rows }) {
   // ReplaySubject observable for each column with up to 100 non-blank column values
   const columnsWithValues = new ReplaySubject();
   columns
@@ -57,7 +57,7 @@ function matchColumnsToSchema ({ schema, columns, rows }) {
   });
 }
 
-function readSchemaColumns ({ columns, rows, matchedColumns, includeUnmatched = true }) {
+export function readSchemaColumns ({ columns, rows, matchedColumns, includeUnmatched = true }) {
   // rows<Observable>
   return rows.map(({ values, index }) => {
     // values<Array>
@@ -107,8 +107,3 @@ const stricmpArray = (a, bs = []) =>
     .map(b =>
       stringSimilarity.compareTwoStrings(a.toLowerCase(), b.toLowerCase())
     );
-
-module.exports = {
-  matchColumnsToSchema,
-  readSchemaColumns
-};

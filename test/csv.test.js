@@ -1,14 +1,13 @@
-const assert = require('assert');
-const csvObservable = require('../src/csv');
+import { ReplaySubject } from 'rxjs';
+import csvObservable from '../src/csv';
 
-describe('csv observable', () => {
-  it('is a function', () => {
-    assert.strictEqual(typeof csvObservable, 'function');
-  });
+test('is a function', () => {
+  expect(typeof csvObservable).toBe('function');
+});
 
-  it('returns "rows" and a "columns" observables', () => {
-    const o = csvObservable(process.stdin);
-    assert.ok(o.rows);
-    assert.ok(o.columns);
-  });
+test('returns "rows" and a "columns" observables', () => {
+  const o = csvObservable(process.stdin);
+  expect(o.rows).toBeInstanceOf(ReplaySubject);
+  expect(o.columns).toBeInstanceOf(ReplaySubject);
+  process.stdin.pause();
 });

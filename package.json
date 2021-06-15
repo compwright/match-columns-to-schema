@@ -13,7 +13,7 @@
     "stream",
     "match"
   ],
-  "source": "src/index.js",
+  "main": "dist/node.js",
   "browser": "dist/browser.min.js",
   "repository": {
     "type": "git",
@@ -30,9 +30,9 @@
   },
   "scripts": {
     "pretest": "semistandard src/*.js src/**/*.js test/*.js test/**/*.js --fix",
-    "test": "nyc mocha --recursive test/ --exit",
+    "test": "jest",
     "demo": "cat ./demo/list.csv | node demo",
-    "build": "parcel build ./src/index.js --target browser --out-file browser.min.js",
+    "build": "parcel build ./src/index.js",
     "publish": "npm run build && git commit -am \"Build\" && git push origin --tags && npm run changelog && git push origin",
     "release:pre": "npm version prerelease && npm publish --tag pre --access public",
     "release:patch": "npm version patch && npm publish --access public",
@@ -44,33 +44,32 @@
     "env": [
       "node",
       "browser",
-      "mocha"
-    ]
-  },
-  "nyc": {
-    "cache": true,
-    "cacheDir": ".nyc_cache",
-    "include": [
-      "src/**/*.js"
-    ],
-    "reporter": [
-      "lcov",
-      "text-summary"
+      "jest"
     ]
   },
   "browserslist": "> 0.25%, not dead",
   "dependencies": {
-    "d3-array": "^2.9.1",
+    "d3-array": "^3.0.1",
     "papaparse": "^5.2.0",
     "rxjs": "^5.5.12",
     "string-similarity": "^4.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.2",
-    "mocha": "^8.4.0",
-    "nyc": "^15.1.0",
-    "parcel-bundler": "^1.12.5",
+    "@parcel/babel-plugin-transform-runtime": "^2.0.0-beta.3.1",
+    "@parcel/babel-preset-env": "^2.0.0-beta.3.1",
+    "jest": "^27.0.4",
+    "parcel": "^2.0.0-beta.3.1",
     "semistandard": "*"
+  },
+  "targets": {
+    "main": {
+      "optimize": false
+    },
+    "module": false,
+    "browser": {
+      "includeNodeModules": true,
+      "optimize": true
+    }
   }
 }

@@ -1,53 +1,51 @@
-const assert = require('assert');
-const fs = require('fs');
-const path = require('path');
-const ColumnToSchemaMatcher = require('../src');
+import fs from 'fs';
+import path from 'path';
+import ColumnToSchemaMatcher from '../src';
 
-describe('ColumnToSchemaMatcher', () => {
-  describe('.constructor', () => {
-    it('is a class constructor', () => {
-      assert.strictEqual(typeof ColumnToSchemaMatcher, 'function');
-      const m = new ColumnToSchemaMatcher(process.stdin);
-      assert.ok(m instanceof ColumnToSchemaMatcher);
-    });
-
-    it('expects a readable stream', () => {
-      assert.throws(() => new ColumnToSchemaMatcher(), {
-        name: 'TypeError',
-        message: 'Cannot read property \'readable\' of undefined'
-      });
-    });
+describe('.constructor', () => {
+  test('is a class constructor', () => {
+    expect(typeof ColumnToSchemaMatcher).toBe('function');
+    const m = new ColumnToSchemaMatcher(process.stdin);
+    expect(m).toBeInstanceOf(ColumnToSchemaMatcher);
+    process.stdin.pause();
   });
 
-  describe('.match', () => {
-    it('is a function', () => {
-      const m = new ColumnToSchemaMatcher(process.stdin);
-      assert.strictEqual(typeof m.match, 'function');
-    });
-
-    it('matches columns to a schema', async () => {
-      const stream = fs.createReadStream(path.resolve(__dirname, '../demo/list.csv'));
-      const schema = require('../demo/schema');
-      const expect = require('./columns.json');
-      const m = new ColumnToSchemaMatcher(stream);
-      const matchedColumns = await m.match(schema).toArray().toPromise();
-      assert.deepStrictEqual(matchedColumns, expect);
+  test('expects a readable stream', () => {
+    expect(() => new ColumnToSchemaMatcher()).toThrow({
+      name: 'TypeError',
+      message: 'Cannot read property \'readable\' of undefined'
     });
   });
+});
 
-  describe('.read', () => {
-    it('is a function', () => {
-      const m = new ColumnToSchemaMatcher(process.stdin);
-      assert.strictEqual(typeof m.read, 'function');
-    });
+describe('.match', () => {
+  test('is a function', () => {
+    const m = new ColumnToSchemaMatcher(process.stdin);
+    expect(typeof m.match).toBe('function');
+    process.stdin.pause();
+  });
 
-    it('reads matched row data', async () => {
-      const stream = fs.createReadStream(path.resolve(__dirname, '../demo/list.csv'));
-      const matchedColumns = require('./columns.json');
-      const expect = require('./rows.json');
-      const m = new ColumnToSchemaMatcher(stream);
-      const rows = await m.read(matchedColumns).take(3).toArray().toPromise();
-      assert.deepStrictEqual(rows, expect);
-    });
+  test('matches columns to a schema', async () => {
+    const stream = fs.createReadStream(path.resolve(__dirname, '../demo/list.csv'));
+    const schema = require('../demo/schema');
+    const m = new ColumnToSchemaMatcher(stream);
+    const matchedColumns = await m.match(schema).toArray().toPromise();
+    expect(matchedColumns).toEqual(require('./columns.json'));
+  });
+});
+
+describe('.read', () => {
+  test('is a function', () => {
+    const m = new ColumnToSchemaMatcher(process.stdin);
+    expect(typeof m.read).toBe('function');
+    process.stdin.pause();
+  });
+
+  test('reads matched row data', async () => {
+    const stream = fs.createReadStream(path.resolve(__dirname, '../demo/list.csv'));
+    const matchedColumns = require('./columns.json');
+    const m = new ColumnToSchemaMatcher(stream);
+    const rows = await m.read(matchedColumns).take(3).toArray().toPromise();
+    expect(rows).toEqual(require('./rows.json'));
   });
 });

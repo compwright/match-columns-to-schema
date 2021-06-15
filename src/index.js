@@ -1,5 +1,5 @@
-const csvObservable = require('./csv');
-const { matchColumnsToSchema, readSchemaColumns } = require('./matcher');
+import csvObservable from './csv';
+import { matchColumnsToSchema, readSchemaColumns } from './matcher';
 
 class ColumnToSchemaMatcher {
   constructor (csvStream) {
@@ -31,4 +31,4 @@ class ColumnToSchemaMatcher {
   }
 }
 
-module.exports = ColumnToSchemaMatcher;
+export default ColumnToSchemaMatcher;

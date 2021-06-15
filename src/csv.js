@@ -1,7 +1,7 @@
-const { Observable, ReplaySubject } = require('rxjs');
-const { parse } = require('papaparse');
+import { Observable, ReplaySubject } from 'rxjs';
+import { parse } from 'papaparse';
 
-module.exports = stream => {
+export default stream => {
   const dataSource = Observable.create(observer => {
     let row = 0;
     parse(stream, {
