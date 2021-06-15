@@ -33,7 +33,7 @@
     "test": "jest",
     "demo": "cat ./demo/list.csv | node demo",
     "build": "parcel build ./src/index.js",
-    "publish": "npm run build && git commit -am \"Build\" && git push origin --tags && npm run changelog && git push origin",
+    "publish": "npm run build && git push origin --tags && npm run changelog && git push origin",
     "release:pre": "npm version prerelease && npm publish --tag pre --access public",
     "release:patch": "npm version patch && npm publish --access public",
     "release:minor": "npm version minor && npm publish --access public",
