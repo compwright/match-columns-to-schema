@@ -49,17 +49,18 @@
   },
   "browserslist": "> 0.25%, not dead",
   "dependencies": {
-    "d3-array": "^3.0.1",
+    "@babel/runtime": "^7.17.9",
+    "d3-array": "^2",
     "papaparse": "^5.2.0",
     "rxjs": "^5.5.12",
     "string-similarity": "^4.0.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@parcel/babel-plugin-transform-runtime": "^2.0.0-beta.3.1",
-    "@parcel/babel-preset-env": "^2.0.0-beta.3.1",
-    "jest": "^27.0.4",
-    "parcel": "^2.0.0-beta.3.1",
+    "@babel/core": "^7.17.10",
+    "@babel/plugin-transform-runtime": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "jest": "*",
+    "parcel": "*",
     "semistandard": "*"
   },
   "targets": {
