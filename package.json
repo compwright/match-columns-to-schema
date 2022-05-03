@@ -1,6 +1,6 @@
 {
   "name": "match-columns-to-schema",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "homepage": "https://github.com/compwright/match-columns-to-schema",
   "description": "Schema field matching algorithm for spreadsheet uploads",
   "keywords": [
